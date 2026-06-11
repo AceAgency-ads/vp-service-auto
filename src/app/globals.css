@@ -1,26 +1,355 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ============================================================
+   VP SERVICE AUTO — design system
+   Motiv central: linii LED roșii pe suprafețe aproape negre
+   (extensia digitală a fațadei antracit cu muchii luminoase).
+   ============================================================ */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@theme {
+  /* fundaluri — peretele fațadei */
+  --color-coal-950: #0b0d0e;
+  --color-coal-900: #0f1113;
+  --color-coal-850: #16181b;
+  --color-coal-800: #1f2225;
+  --color-coal-700: #2a2d31;
+  --color-coal-600: #3a3e44;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* text */
+  --color-steel-400: #8a9097;
+  --color-steel-300: #aab0b6;
+  --color-steel-200: #d6d9dc;
+  --color-paper: #f5f6f7;
+
+  /* LED */
+  --color-red: #e30613;
+  --color-red-bright: #ff3b45;
+  --color-red-dark: #b00510;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-jakarta), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* StarBorder (reactbits) */
+  --animate-star-movement-bottom: star-movement-bottom linear infinite alternate;
+  --animate-star-movement-top: star-movement-top linear infinite alternate;
+
+  @keyframes star-movement-bottom {
+    0% {
+      transform: translate(0%, 0%);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-100%, 0%);
+      opacity: 0;
+    }
+  }
+  @keyframes star-movement-top {
+    0% {
+      transform: translate(0%, 0%);
+      opacity: 1;
+    }
+    100% {
+      transform: translate(100%, 0%);
+      opacity: 0;
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-coal-950 font-sans text-steel-200 antialiased;
+    font-size: 16px;
+    line-height: 1.65;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading text-paper;
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-size: clamp(38px, 6.5vw, 68px);
+    font-weight: 800;
+    line-height: 1.04;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: clamp(28px, 4vw, 44px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+  }
+
+  h3 {
+    font-size: clamp(19px, 2.4vw, 25px);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  ::selection {
+    background: rgba(227, 6, 19, 0.4);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-red-bright);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* ——— FOUC-safe reveals: ascunse doar când JS e activ ——— */
+.js [data-reveal],
+.js [data-reveal-child] {
+  opacity: 0;
+}
+.js [data-line-draw] {
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+.js [data-line-draw="y"] {
+  transform: scaleY(0);
+  transform-origin: center top;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal],
+  .js [data-reveal-child] {
+    opacity: 1 !important;
+  }
+  .js [data-line-draw],
+  .js [data-line-draw="y"] {
+    transform: none !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@layer components {
+  /* skip-link accesibilitate */
+  .skip-link {
+    position: absolute;
+    top: -100%;
+    left: 1rem;
+    z-index: 100;
+    padding: 0.7rem 1.2rem;
+    border-radius: 0.5rem;
+    background: var(--color-red);
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .skip-link:focus-visible {
+    top: 1rem;
+  }
+
+  /* container standard */
+  .wrap {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+  }
+
+  /* kicker uppercase cu prefix // */
+  .eyebrow {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.55rem;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-steel-300);
+  }
+  .eyebrow::before {
+    content: "//";
+    color: var(--color-red-bright);
+    font-weight: 800;
+    letter-spacing: 0;
+  }
+
+  /* hairline LED orizontal cu glow */
+  .led-line {
+    height: 2px;
+    border: 0;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-red) 18%,
+      var(--color-red-bright) 50%,
+      var(--color-red) 82%,
+      transparent
+    );
+    box-shadow:
+      0 0 12px rgba(227, 6, 19, 0.55),
+      0 0 34px rgba(227, 6, 19, 0.25);
+  }
+
+  /* card înrămat ca ușa cu LED a clădirii */
+  .led-frame {
+    position: relative;
+    background: var(--color-coal-800);
+    border: 1px solid rgba(227, 6, 19, 0.5);
+    border-radius: 0.875rem;
+    box-shadow:
+      0 0 0 1px rgba(227, 6, 19, 0.1),
+      0 0 22px rgba(227, 6, 19, 0.18),
+      inset 0 0 26px rgba(227, 6, 19, 0.05);
+  }
+
+  /* muchie superioară luminoasă */
+  .red-edge {
+    position: relative;
+  }
+  .red-edge::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-red-bright), transparent);
+    box-shadow: 0 0 14px rgba(227, 6, 19, 0.6);
+    pointer-events: none;
+  }
+
+  /* banda diagonală roșie din bannerul fațadei */
+  .slash-strip {
+    background: var(--color-red);
+    color: #fff;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transform: skewY(-1.4deg);
+  }
+  .slash-strip > * {
+    transform: skewY(1.4deg);
+  }
+
+  /* butoane */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1;
+    border-radius: 0.625rem;
+    padding: 1rem 1.65rem;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      box-shadow 0.25s ease,
+      transform 0.15s ease;
+  }
+  .btn:active {
+    transform: translateY(1px);
+  }
+  .btn-primary {
+    background: var(--color-red);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: var(--color-red-bright);
+    box-shadow: 0 0 26px rgba(227, 6, 19, 0.45);
+  }
+  .btn-ghost {
+    border: 1px solid var(--color-coal-600);
+    color: var(--color-paper);
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    border-color: var(--color-red);
+    box-shadow: 0 0 18px rgba(227, 6, 19, 0.25);
+  }
+
+  /* marquee CSS pur (parteneri / branduri) */
+  .marquee {
+    overflow: hidden;
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee-scroll 46s linear infinite;
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+  @keyframes marquee-scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+  }
+
+  /* proza paginilor legale: panel ridicat, măsură 65ch */
+  .prose-legal {
+    max-width: 65ch;
+  }
+  .prose-legal h2 {
+    font-size: clamp(20px, 2.6vw, 27px);
+    margin-top: 2.4rem;
+    margin-bottom: 0.85rem;
+  }
+  .prose-legal h3 {
+    font-size: 17px;
+    margin-top: 1.6rem;
+    margin-bottom: 0.6rem;
+  }
+  .prose-legal p,
+  .prose-legal li {
+    color: var(--color-steel-300);
+    margin-bottom: 0.85rem;
+  }
+  .prose-legal ul {
+    list-style: disc;
+    padding-left: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  .prose-legal a {
+    color: var(--color-red-bright);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-legal strong {
+    color: var(--color-paper);
+  }
+  .prose-legal table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-block: 1.2rem;
+  }
+  .prose-legal th,
+  .prose-legal td {
+    border: 1px solid var(--color-coal-600);
+    padding: 0.6rem 0.8rem;
+    text-align: left;
+    color: var(--color-steel-300);
+  }
+  .prose-legal th {
+    color: var(--color-paper);
+    background: var(--color-coal-800);
+  }
 }

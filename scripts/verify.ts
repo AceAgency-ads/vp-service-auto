@@ -256,7 +256,11 @@ const realErrors = consoleErrors.filter(
   (e) =>
     !e.includes("Download the React DevTools") &&
     /* 404-urile așteptate: doar pe ruta de test inexistentă */
-    !(e.includes("pagina-care-nu-exista") && e.includes("404")),
+    !(e.includes("pagina-care-nu-exista") && e.includes("404")) &&
+    /* TODO(client): scoate când clipurile reale ajung în public/videos —
+       până atunci BackgroundVideo degradează la poster, iar .mp4-urile
+       placeholder dau 404 (așteptat). */
+    !e.includes("/videos/"),
 );
 if (realErrors.length) {
   realErrors.forEach((e) => console.log("  ✗", e));

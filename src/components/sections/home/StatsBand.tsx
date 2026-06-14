@@ -1,4 +1,6 @@
 import { STATS } from "@/lib/site";
+import { VIDEOS } from "@/lib/videos";
+import { BackgroundVideo } from "@/components/ui/BackgroundVideo";
 
 /* Banda diagonală roșie a fațadei + counterele anime.js. */
 
@@ -10,6 +12,18 @@ export function StatsBand() {
           Rapid <span aria-hidden>\</span> Calitate garantată{" "}
           <span aria-hidden>\</span> Prețuri corecte
         </p>
+      </div>
+
+      {/* accent inline — clip mic încadrat (cabină de vopsitorie) */}
+      <div className="wrap pt-14" data-reveal>
+        <div className="led-frame relative mx-auto aspect-video w-full max-w-3xl overflow-hidden rounded-xl">
+          <BackgroundVideo
+            src={VIDEOS.paintLoop.src}
+            poster={VIDEOS.paintLoop.poster}
+            alt={VIDEOS.paintLoop.alt}
+            sizes="(max-width: 768px) 100vw, 768px"
+          />
+        </div>
       </div>
 
       <div className="wrap py-14 md:py-16">

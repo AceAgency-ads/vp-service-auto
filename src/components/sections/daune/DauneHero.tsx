@@ -1,23 +1,21 @@
-import Image from "next/image";
 import Link from "next/link";
-import { IMAGES } from "@/lib/images";
+import { VIDEOS } from "@/lib/videos";
 import { SITE } from "@/lib/site";
 import { Icon } from "@/components/ui/Icon";
 import { HeroTitle } from "@/components/ui/HeroTitle";
+import { BackgroundVideo } from "@/components/ui/BackgroundVideo";
 import StarBorder from "@/components/reactbits/StarBorder";
 
 export function DauneHero() {
   return (
     <section className="relative isolate overflow-hidden">
-      <Image
-        src={IMAGES.damagedCar.src}
-        alt={IMAGES.damagedCar.alt}
-        fill
+      {/* video în loop (panou avariat → reparat) — poster placeholder */}
+      <BackgroundVideo
+        src={VIDEOS.dauneLoop.src}
+        poster={VIDEOS.dauneLoop.poster}
+        alt={VIDEOS.dauneLoop.alt}
         priority
-        fetchPriority="high"
-        quality={60}
         sizes="100vw"
-        className="object-cover object-center"
       />
       <div
         className="absolute inset-0"

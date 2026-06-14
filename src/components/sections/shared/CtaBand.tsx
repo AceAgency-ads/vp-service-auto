@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { SITE } from "@/lib/site";
+import { VIDEOS } from "@/lib/videos";
 import { Icon } from "@/components/ui/Icon";
+import { BackgroundVideo } from "@/components/ui/BackgroundVideo";
 import StarBorder from "@/components/reactbits/StarBorder";
 
 /* Banda finală de conversie — telefon-first, pe fiecare pagină. */
@@ -13,7 +15,15 @@ export function CtaBand({
   sub?: string;
 }) {
   return (
-    <section className="relative overflow-hidden border-t border-coal-800 bg-coal-900">
+    <section className="relative isolate overflow-hidden border-t border-coal-800 bg-coal-900">
+      {/* refolosește clipul de hero, întunecat + blurat ca ambianță discretă */}
+      <BackgroundVideo
+        src={VIDEOS.heroLoop.src}
+        poster={VIDEOS.heroLoop.poster}
+        className="scale-105 blur-md"
+        overlayClassName="bg-coal-950/80"
+        sizes="100vw"
+      />
       <div
         className="pointer-events-none absolute inset-0"
         style={{

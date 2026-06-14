@@ -1,24 +1,22 @@
-import Image from "next/image";
 import Link from "next/link";
-import { IMAGES } from "@/lib/images";
+import { VIDEOS } from "@/lib/videos";
 import { SITE, TRUST_CHIPS } from "@/lib/site";
 import { Icon } from "@/components/ui/Icon";
 import { HeroTitle } from "@/components/ui/HeroTitle";
+import { BackgroundVideo } from "@/components/ui/BackgroundVideo";
 import StarBorder from "@/components/reactbits/StarBorder";
 
 export function HomeHero() {
   return (
     <section className="relative isolate overflow-hidden">
-      {/* fațada reală — fundalul întregului hero */}
-      <Image
-        src={IMAGES.heroFacade.src}
-        alt={IMAGES.heroFacade.alt}
-        fill
+      {/* video în loop (mașina se dezasamblează → reasamblează) —
+          poster = fundalul actual până vine clipul real */}
+      <BackgroundVideo
+        src={VIDEOS.heroLoop.src}
+        poster={VIDEOS.heroLoop.poster}
+        alt={VIDEOS.heroLoop.alt}
         priority
-        fetchPriority="high"
-        quality={60}
         sizes="(max-width: 767px) 75vw, 100vw"
-        className="object-cover object-center"
       />
       {/* gradient: lizibilitate text + topire în coal-950 */}
       <div

@@ -13,9 +13,9 @@ export const SITE = {
   description:
     "Centru de constatare daune RCA/CASCO și service auto complet în București: tinichigerie, vopsitorie, mecanică, mașină la schimb.",
 
-  phoneDisplay: "07XX XXX XXX", // TODO(client): numărul real
-  phoneHref: "tel:+40700000000", // TODO(client): numărul real în format E.164
-  whatsappHref: "https://wa.me/40700000000", // TODO(client): numărul real
+  phoneDisplay: "0799 706 706",
+  phoneHref: "tel:+40799706706",
+  whatsappHref: "https://wa.me/40799706706",
   email: "contact@vpserviceauto.ro", // TODO(client): adresa reală
 
   address: {

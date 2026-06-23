@@ -29,7 +29,7 @@ export const VIDEOS = {
   // HERO home: mașina se dezasamblează → reasamblează (exploded view).
   heroLoop: {
     src: "/videos/hero-loop.mp4",
-    poster: IMAGES.heroFacade.src, // TODO(client): → /videos/hero-loop.webp
+    poster: "/videos/hero-loop.webp", // cadru AI (Porsche atelier) până vine .mp4
     alt: "Atelier VP Service Auto cu lumini LED roșii — mașină în prezentare",
   },
   // DAUNE hero: panou avariat → reparat (loop „heal").

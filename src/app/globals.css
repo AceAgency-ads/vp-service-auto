@@ -303,6 +303,30 @@
     }
   }
 
+  /* tilt 3D discret pe hover (recenzii) — CSS pur, fără JS */
+  .tilt-card {
+    transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+    will-change: transform;
+  }
+  .tilt-card:hover {
+    transform: perspective(900px) rotateX(4deg) translateY(-5px);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tilt-card,
+    .tilt-card:hover {
+      transition: none;
+      transform: none;
+    }
+  }
+
+  /* ghilimea-motiv decorativă (recenzii) */
+  .quote-mark {
+    font-family: var(--font-heading);
+    line-height: 0.7;
+    color: rgba(227, 6, 19, 0.16);
+    user-select: none;
+  }
+
   /* proza paginilor legale: panel ridicat, măsură 65ch */
   .prose-legal {
     max-width: 65ch;

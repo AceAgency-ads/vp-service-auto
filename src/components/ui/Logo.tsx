@@ -17,9 +17,9 @@ export function Logo({ withTagline = false }: { withTagline?: boolean }) {
         />
         <text
           x="32"
-          y="47"
+          y="44"
           textAnchor="middle"
-          fontSize="27"
+          fontSize="26"
           fontWeight="800"
           fill="#ffffff"
           fontFamily="inherit"
@@ -27,6 +27,8 @@ export function Logo({ withTagline = false }: { withTagline?: boolean }) {
         >
           VP
         </text>
+        {/* accent LED sub „VP" — echo .led-line / .slash-strip */}
+        <rect x="18" y="52" width="28" height="4" rx="2" fill="#ffffff" />
       </svg>
       <span className="leading-tight">
         <span className="font-heading block text-[17px] font-extrabold tracking-wide text-paper">

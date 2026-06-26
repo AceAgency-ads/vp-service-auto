@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { animate, stagger, createScope } from "animejs";
 
 /* ============================================================
@@ -33,6 +34,13 @@ function countText(el: HTMLElement, n: number) {
 }
 
 export function RevealProvider({ children }: { children: ReactNode }) {
+  /* App Router NU remontează layout-ul la navigare — doar `children` se
+     schimbă. usePathname re-randează provider-ul la fiecare rută, iar
+     dependența [pathname] face effect-ul să re-inițializeze observerele pe
+     DOM-ul noii pagini (altfel elementele [data-reveal] rămân la opacity:0
+     din globals.css și pagina pare goală până la un hard refresh). */
+  const pathname = usePathname();
+
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       document
@@ -128,6 +136,17 @@ export function RevealProvider({ children }: { children: ReactNode }) {
     );
     actions.forEach((_, el) => io.observe(el));
 
+    /* flush inițial: la navigarea soft Next.js resetează scroll-ul la top,
+       deci elementele above-the-fold ale noii pagini sunt deja în viewport.
+       Le aprindem sincron (același criteriu ca onScroll) ca să nu rămână o
+       clipă ascunse până când IntersectionObserver livrează primul callback. */
+    {
+      const limit = window.innerHeight * 0.95;
+      actions.forEach((_, el) => {
+        if (el.getBoundingClientRect().top < limit) fire(el);
+      });
+    }
+
     /* plasă de siguranță pentru scroll foarte rapid (fling):
        IO poate „sări" elemente traversate între două frame-uri —
        aprindem tot ce e deja în viewport sau deasupra lui. */
@@ -151,7 +170,7 @@ export function RevealProvider({ children }: { children: ReactNode }) {
       io.disconnect();
       scope.revert();
     };
-  }, []);
+  }, [pathname]);
 
   return <>{children}</>;
 }

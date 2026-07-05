@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { HomeHero } from "@/components/sections/home/HomeHero";
+import { LocationTeaser } from "@/components/sections/home/LocationTeaser";
 import { PartnersMarquee } from "@/components/sections/shared/PartnersMarquee";
 import { ServicesOverview } from "@/components/sections/home/ServicesOverview";
 import { StatsBand } from "@/components/sections/home/StatsBand";
@@ -19,6 +20,7 @@ export default function HomePage() {
   return (
     <>
       <HomeHero />
+      <LocationTeaser />
       <PartnersMarquee />
       <ServicesOverview />
       <StatsBand />

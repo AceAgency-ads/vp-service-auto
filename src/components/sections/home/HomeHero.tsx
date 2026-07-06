@@ -1,32 +1,26 @@
-import Image from "next/image";
 import Link from "next/link";
-import { IMAGES } from "@/lib/images";
+import { VIDEOS } from "@/lib/videos";
 import { SITE, TRUST_CHIPS } from "@/lib/site";
 import { Icon } from "@/components/ui/Icon";
 import { HeroTitle } from "@/components/ui/HeroTitle";
+import { BackgroundVideo } from "@/components/ui/BackgroundVideo";
 import StarBorder from "@/components/reactbits/StarBorder";
 
 export function HomeHero() {
   return (
     <section className="relative isolate overflow-hidden">
-      {/* fotografia reală a fațadei (client), decupată să scoată panoul
-          publicitar de sus (text care dubla H1-ul) — fundal full-bleed
-          doar de la md în sus. Pe mobil (fundal prea îngust/înalt ca să
-          încapă firma întreagă via object-cover) renunțăm la fundal și
-          arătăm poza ca și card încadrat, în fluxul conținutului. */}
-      <Image
-        src={IMAGES.facadeHero.src}
-        alt={IMAGES.facadeHero.alt}
-        fill
+      {/* video în loop (mașina se dezasamblează → reasamblează) —
+          poster = fundalul actual până vine clipul real */}
+      <BackgroundVideo
+        src={VIDEOS.heroLoop.src}
+        poster={VIDEOS.heroLoop.poster}
+        alt={VIDEOS.heroLoop.alt}
         priority
-        fetchPriority="high"
-        quality={70}
-        sizes="100vw"
-        className="hidden object-cover md:block"
+        sizes="(max-width: 767px) 75vw, 100vw"
       />
-      {/* gradient: lizibilitate text + topire în coal-950 (doar peste fundalul desktop) */}
+      {/* gradient: lizibilitate text + topire în coal-950 */}
       <div
-        className="absolute inset-0 hidden md:block"
+        className="absolute inset-0"
         style={{
           background:
             "linear-gradient(78deg, rgba(11,13,14,0.96) 0%, rgba(11,13,14,0.82) 38%, rgba(11,13,14,0.45) 68%, rgba(11,13,14,0.35) 100%)",
@@ -69,24 +63,6 @@ export function HomeHero() {
           <Link href="/contact" className="btn btn-ghost">
             Programează constatarea
           </Link>
-        </div>
-
-        {/* pe mobil, poza reală a fațadei intră ca și card încadrat —
-            fără fundal full-bleed, nu are cum să intre în coliziune
-            cu textul de mai sus. */}
-        <div
-          className="red-edge mt-9 overflow-hidden rounded-2xl border border-coal-700 md:hidden"
-          data-reveal
-          data-reveal-delay="620"
-        >
-          <Image
-            src={IMAGES.facadeHero.src}
-            alt={IMAGES.facadeHero.alt}
-            width={IMAGES.facadeHero.width}
-            height={IMAGES.facadeHero.height}
-            sizes="100vw"
-            className="h-auto w-full object-cover"
-          />
         </div>
 
         <ul

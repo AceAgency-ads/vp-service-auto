@@ -23,11 +23,11 @@ export const IMAGES = {
     height: 1500,
     alt: "Fațada VP Service Auto — clădire antracit cu linii LED roșii, Splaiul Unirii 969, București",
   },
-  facadeBillboard: {
-    src: "/images/facade-billboard.webp",
+  facadeHero: {
+    src: "/images/facade-hero.webp",
     width: 1448,
-    height: 1086,
-    alt: "Fațada și panoul publicitar VP Service Auto — Splaiul Unirii 969, București",
+    height: 564,
+    alt: "Firma VP Service Auto pe clădire — Splaiul Unirii 969, București",
   },
   workshopDark: {
     src: "/images/workshop-dark.webp",

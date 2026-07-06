@@ -2,6 +2,11 @@
 
 `hero-facade.webp` = fotografia REALĂ a fațadei (client, WhatsApp 07.06.2026).
 `og-image.webp` = derivată din fațadă (compusă de scripts/fetch-images.ts).
+`facade-hero.webp` = decupaj (client, WhatsApp 03.07.2026) — doar firma +
+clădirea, fără panoul publicitar de sus (evită coliziunea cu H1 din hero).
+`facade-billboard.webp` = sursa completă (nedecupată) a celor de mai sus —
+nu mai e referențiată în manifest, păstrată doar ca sursă pentru viitoare
+decupaje.
 
 Restul sunt stock Unsplash (licență Unsplash, fără atribuire obligatorie),
 alese să respecte paleta dark/roșu. **Lista de swap** — când vin pozele

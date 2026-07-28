@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { SITE } from "@/lib/site";
 import { PageHero } from "@/components/sections/shared/PageHero";
-import { ContactForm } from "@/components/ui/ContactForm";
 import { MapEmbed } from "@/components/ui/MapEmbed";
 import { Icon } from "@/components/ui/Icon";
 import { DirectionsTrigger } from "@/components/ui/DirectionsTrigger";
@@ -11,7 +10,7 @@ import { breadcrumbSchema } from "@/lib/jsonld";
 export const metadata: Metadata = {
   title: "Contact & Programări",
   description:
-    "Programează constatarea sau reparația la VP Service Auto: Splaiul Unirii 969, București. Telefon, WhatsApp sau formular online — răspundem rapid.",
+    "Programează constatarea sau reparația la VP Service Auto: Splaiul Unirii 969, București. Sună-ne sau scrie-ne pe WhatsApp — răspundem rapid.",
   alternates: { canonical: "/contact" },
 };
 
@@ -33,10 +32,56 @@ export default function ContactPage() {
             rezolvăm în aceeași zi
           </>
         }
-        sub="Sună-ne, scrie-ne pe WhatsApp sau lasă-ne datele tale — te contactăm noi în cel mai scurt timp."
+        sub="Sună-ne sau scrie-ne pe WhatsApp — îți spunem pe loc ce acte îți trebuie și când te putem primi."
       />
 
-      <section className="wrap grid gap-14 py-16 md:grid-cols-[1fr_1.2fr] md:py-24">
+      {/* cele două canale directe, egale ca greutate */}
+      <section className="wrap py-16 md:py-20">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <a
+            href={SITE.phoneHref}
+            className="red-edge group flex flex-col gap-2 rounded-2xl border border-coal-700 bg-coal-850 p-7 transition-colors hover:border-red"
+            data-reveal
+          >
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-coal-700 bg-coal-800 text-red-bright">
+              <Icon name="phone" size={22} />
+            </span>
+            <span className="font-heading mt-2 text-xl font-bold text-paper">
+              Sună acum
+            </span>
+            <span className="font-heading text-2xl font-extrabold text-red-bright">
+              {SITE.phoneDisplay}
+            </span>
+            <span className="text-sm text-steel-400">
+              Cel mai rapid — răspundem în timpul programului.
+            </span>
+          </a>
+
+          <a
+            href={SITE.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex flex-col gap-2 rounded-2xl border border-coal-700 bg-coal-850 p-7 transition-colors hover:border-red"
+            data-reveal
+            data-reveal-delay="120"
+          >
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl border border-coal-700 bg-coal-800 text-red-bright">
+              <Icon name="whatsapp" size={22} />
+            </span>
+            <span className="font-heading mt-2 text-xl font-bold text-paper">
+              Scrie-ne pe WhatsApp
+            </span>
+            <span className="font-heading text-2xl font-extrabold text-paper">
+              {SITE.phoneDisplay}
+            </span>
+            <span className="text-sm text-steel-400">
+              Trimite-ne poze cu dauna — evaluăm și te sunăm înapoi.
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <section className="wrap grid gap-14 pb-16 md:grid-cols-2 md:pb-24">
         {/* coloana info */}
         <div className="flex flex-col gap-8">
           <div>
@@ -120,8 +165,8 @@ export default function ContactPage() {
               Ai avut accident chiar acum?
             </p>
             <p className="mt-2 text-sm text-steel-300">
-              Nu completa formulare. Sună direct — îți spunem pe loc ce faci
-              mai departe și trimitem platforma dacă mașina nu rulează.
+              Sună direct — îți spunem pe loc ce faci mai departe și trimitem
+              platforma dacă mașina nu rulează.
             </p>
             <a href={SITE.phoneHref} className="btn btn-primary mt-4 w-full">
               <Icon name="phone" size={18} />
@@ -130,14 +175,54 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* coloana formular */}
+        {/* ce pregătești înainte să suni — înlocuiește câmpurile fostului formular */}
         <div className="rounded-2xl border border-coal-700 bg-coal-850 p-7 md:p-9">
-          <h2 className="!text-2xl">Programează-te online</h2>
-          <p className="mt-2 mb-7 text-sm text-steel-400">
-            Câmpurile marcate cu * sunt obligatorii. Te sunăm noi pentru
-            confirmare.
+          <h2 className="!text-2xl">Ce e bine să ai la îndemână</h2>
+          <p className="mt-2 text-sm text-steel-400">
+            Nu sunt obligatorii — dar cu ele îți dăm un răspuns exact din primul
+            telefon.
           </p>
-          <ContactForm />
+          <ul className="mt-7 flex flex-col gap-4">
+            {[
+              {
+                title: "Marca, modelul și anul mașinii",
+                text: "Ca să știm din start ce piese și ce durată implică lucrarea.",
+              },
+              {
+                title: "Numărul de înmatriculare",
+                text: "Necesar la deschiderea dosarului de daună.",
+              },
+              {
+                title: "Seria poliței RCA sau CASCO",
+                text: "O găsești în polița de asigurare sau în aplicația asiguratorului.",
+              },
+              {
+                title: "Câteva poze cu dauna",
+                text: "Trimise pe WhatsApp, ne lasă să estimăm înainte să vii.",
+              },
+            ].map((item) => (
+              <li key={item.title} className="flex items-start gap-3">
+                <Icon
+                  name="check"
+                  size={18}
+                  className="mt-0.5 shrink-0 text-red-bright"
+                />
+                <div>
+                  <p className="font-semibold text-paper">{item.title}</p>
+                  <p className="text-sm text-steel-400">{item.text}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <a
+            href={SITE.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-ghost mt-8 w-full"
+          >
+            <Icon name="whatsapp" size={18} />
+            Trimite pozele pe WhatsApp
+          </a>
         </div>
       </section>
 

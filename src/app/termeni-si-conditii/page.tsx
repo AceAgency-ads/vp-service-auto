@@ -29,14 +29,14 @@ export default function TermeniSiConditiiPage() {
       <h2>2. Estimări și programări</h2>
       <ul>
         <li>
-          Prețurile și termenele comunicate telefonic, pe WhatsApp sau prin
-          formular sunt <strong>estimative</strong>. Valorile finale se
-          stabilesc doar după constatarea fizică a mașinii în service și, în
-          cazul dosarelor de daună, după acceptul asiguratorului.
+          Prețurile și termenele comunicate telefonic, pe WhatsApp sau pe email
+          sunt <strong>estimative</strong>. Valorile finale se stabilesc doar
+          după constatarea fizică a mașinii în service și, în cazul dosarelor
+          de daună, după acceptul asiguratorului.
         </li>
         <li>
-          Trimiterea formularului de programare nu creează o rezervare fermă —
-          programarea se confirmă telefonic.
+          O solicitare de programare nu creează o rezervare fermă — programarea
+          se confirmă telefonic.
         </li>
         <li>
           Informațiile despre procesele RCA/CASCO publicate pe Site au rol

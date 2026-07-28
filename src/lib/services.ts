@@ -333,10 +333,3 @@ export const SERVICE_SLUGS = SERVICES.map((s) => s.slug);
 export function getService(slug: string): Service | undefined {
   return SERVICES.find((s) => s.slug === slug);
 }
-
-/** Opțiunile câmpului „Serviciu” din formularul de contact */
-export const FORM_SERVICE_OPTIONS = [
-  { value: "constatare-daune", label: "Constatare daune RCA/CASCO" },
-  ...SERVICES.map((s) => ({ value: s.slug, label: s.title })),
-  { value: "altele", label: "Altele / nu sunt sigur" },
-] as const;

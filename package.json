@@ -9,15 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.4.0",
     "@vercel/analytics": "^2.0.1",
     "animejs": "^4.4.1",
     "next": "16.2.9",
     "react": "19.2.4",
-    "react-dom": "19.2.4",
-    "react-hook-form": "^7.78.0",
-    "resend": "^6.12.4",
-    "zod": "^4.4.3"
+    "react-dom": "19.2.4"
   },
   "devDependencies": {
     "@img/sharp-libvips-darwin-arm64": "^1.3.0",

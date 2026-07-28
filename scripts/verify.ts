@@ -5,7 +5,7 @@
 
    1. 9 rute × {390, 1440}: scroll-through + screenshot + h1
    2. Navigație desktop + meniu mobil
-   3. Formular contact: invalid (erori inline RO) + happy path
+   3. /contact telefon-first: fără formular, fără ruta /api/contact
    4. Cookie consent: persistă în localStorage, dispare la reload
    5. Bara de acțiuni: permanentă pe mobil (inclusiv la scrollY=0),
       absentă pe desktop; „Locație" deschide sheet-ul Maps/Waze
@@ -206,39 +206,27 @@ for (const [tag, viewport] of [
   await ctx.close();
 }
 
-/* —— 4. formular: invalid + happy path —— */
+/* —— 4. /contact e telefon-first: zero formular, zero /api/contact —— */
 {
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const page = await ctx.newPage();
-  page.on("pageerror", (e) => consoleErrors.push(`[form] pageerror: ${e.message}`));
+  page.on("pageerror", (e) => consoleErrors.push(`[contact] pageerror: ${e.message}`));
   await page.goto(BASE + "/contact", { waitUntil: "load" });
   await dismissConsent(page);
 
-  /* invalid: submit gol → erori inline în română */
-  await page.getByRole("button", { name: /Trimite cererea/i }).click();
-  await page.waitForTimeout(400);
-  const alerts = await page.getByRole("alert").count();
-  ok("formular gol → erori inline", alerts >= 3, `${alerts} erori`);
-  await page.screenshot({ path: path.join(OUT, "form-invalid.png") });
+  ok("zero <form> pe /contact", (await page.locator("form").count()) === 0);
+  ok("zero inputuri pe /contact",
+    (await page.locator("input, textarea, select").count()) === 0);
 
-  /* happy path */
-  await page.getByLabel("Nume *").fill("Ion Popescu");
-  await page.getByLabel("Telefon *").fill("0722123456");
-  await page.getByLabel(/^Email/).fill("ion.popescu@exemplu.ro");
-  await page.getByLabel(/Marcă și model/).fill("VW Golf 7");
-  await page.getByLabel(/Serviciu \*/).selectOption("tinichigerie");
-  await page.getByLabel(/Mesaj/).fill("Lovitură în aripa dreapta față.");
-  await page.getByRole("checkbox").check();
-  await page.getByRole("button", { name: /Trimite cererea/i }).click();
-  const success = page.getByTestId("contact-success");
-  let successVisible = true;
-  try {
-    await success.waitFor({ state: "visible", timeout: 8000 });
-  } catch {
-    successVisible = false;
-  }
-  ok("formular valid → „Cerere trimisă!”", successVisible);
-  await page.screenshot({ path: path.join(OUT, "form-success.png") });
+  const tel = await page.locator(`a[href="${"tel:+40799706706"}"]`).count();
+  ok("/contact are linkuri de telefon", tel >= 2, `${tel} linkuri`);
+  const wa = await page.locator('a[href*="wa.me"]').count();
+  ok("/contact are linkuri WhatsApp", wa >= 2, `${wa} linkuri`);
+  await page.screenshot({ path: path.join(OUT, "contact-no-form.png"), fullPage: true });
+
+  /* ruta API a dispărut de tot */
+  const res = await page.request.post(BASE + "/api/contact", { data: { name: "x" } });
+  ok("POST /api/contact → 404", res.status() === 404, `status ${res.status()}`);
   await ctx.close();
 }
 

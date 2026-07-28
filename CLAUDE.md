@@ -45,11 +45,12 @@ Tagline: „Ne pasă de mașina ta!".
 ## Reguli & placeholders
 
 - Date client nefinalizate marcate `TODO(client)` — grep înainte de live:
-  denumire SRL, CUI, email (`site.ts`); clipurile reale (`videos.ts`);
-  domeniul verificat în Resend (`api/contact/route.ts`).
+  denumire SRL, CUI, email (`site.ts`); clipurile reale (`videos.ts`).
   Rezolvate din fișa Google (CID `3512668700996052883`): cod poștal,
   pin hartă (`geo`), linkuri `maps.*`, program.
 - GDPR: `<Analytics/>` se randează DOAR după consent „all"
   (`vp-consent` în localStorage). Harta = click-to-load.
 - Footer obligatoriu: linkuri ANPC + SOL.
-- Formularul merge fără `RESEND_API_KEY` (log server + succes UI).
+- **Fără formular de contact** (scos la cererea clientului) — conversia
+  merge exclusiv pe telefon / WhatsApp. Nu există rute `/api`, nici
+  dependențe de formular (`resend`, `zod`, `react-hook-form`).

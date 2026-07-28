@@ -48,7 +48,7 @@ export function CtaBand({
             {SITE.phoneDisplay}
           </StarBorder>
           <Link href="/contact" className="btn btn-ghost">
-            Programează-te online
+            Programează o vizită
           </Link>
           <DirectionsTrigger className="btn btn-ghost">
             <Icon name="map-pin" size={18} />

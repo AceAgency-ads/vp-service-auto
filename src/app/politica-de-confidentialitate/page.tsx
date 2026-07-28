@@ -31,10 +31,11 @@ export default function PoliticaConfidentialitatePage() {
       <h2>2. Ce date colectăm</h2>
       <ul>
         <li>
-          <strong>Date trimise prin formularul de programare:</strong> nume,
-          număr de telefon, adresă de email (opțional), marca/modelul mașinii
-          (opțional), numărul de înmatriculare (opțional), serviciul dorit și
-          mesajul tău.
+          <strong>Date pe care ni le transmiți direct:</strong> Site-ul nu are
+          formular și nu colectează date prin el. Dacă ne suni, ne scrii pe
+          WhatsApp sau pe email, prelucrăm doar ce ne comunici tu în acea
+          conversație — de regulă numele, numărul de telefon, datele mașinii și
+          descrierea daunei.
         </li>
         <li>
           <strong>Date colectate automat (doar cu acordul tău):</strong>{" "}
@@ -62,8 +63,8 @@ export default function PoliticaConfidentialitatePage() {
 
       <h2>4. Cât timp păstrăm datele</h2>
       <p>
-        Cererile trimise prin formular sunt păstrate maximum 12 luni de la
-        ultimul contact, apoi sunt șterse. Dacă devii client, documentele
+        Cererile primite prin telefon, WhatsApp sau email sunt păstrate maximum
+        12 luni de la ultimul contact, apoi sunt șterse. Dacă devii client, documentele
         aferente lucrărilor se păstrează conform obligațiilor legale
         (contabile și fiscale).
       </p>
@@ -77,10 +78,6 @@ export default function PoliticaConfidentialitatePage() {
         <li>
           <strong>Vercel Inc.</strong> — găzduirea Site-ului și, doar cu
           acordul tău, statistici anonime de trafic;
-        </li>
-        <li>
-          <strong>Resend</strong> — transmiterea emailurilor generate de
-          formularul de contact;
         </li>
         <li>
           asiguratorii implicați în dosarul tău de daună — doar la cererea și

@@ -34,6 +34,8 @@ export function autoRepairSchema() {
       latitude: SITE.geo.lat,
       longitude: SITE.geo.lng,
     },
+    hasMap: SITE.maps.place,
+    sameAs: [SITE.maps.share],
     openingHoursSpecification: SITE.hoursSchema.map((h) => ({
       "@type": "OpeningHoursSpecification",
       dayOfWeek: h.dayOfWeek,

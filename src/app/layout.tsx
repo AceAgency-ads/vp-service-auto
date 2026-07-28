@@ -30,6 +30,12 @@ export const metadata: Metadata = {
     template: "%s | VP Service Auto",
   },
   description: SITE.description,
+  other: {
+    "geo.position": `${SITE.geo.lat};${SITE.geo.lng}`,
+    ICBM: `${SITE.geo.lat}, ${SITE.geo.lng}`,
+    "geo.region": "RO-B",
+    "geo.placename": SITE.address.city,
+  },
   openGraph: {
     type: "website",
     locale: "ro_RO",
@@ -56,7 +62,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ro" className={`${inter.variable} ${jakarta.variable}`}>
-      <body className="flex min-h-dvh flex-col">
+      {/* padding-ul de jos compensează bara permanentă de acțiuni (md:hidden),
+          altfel linkurile legale ANPC/SOL din footer ajung sub ea */}
+      <body className="flex min-h-dvh flex-col pb-[calc(4.75rem+env(safe-area-inset-bottom))] md:pb-0">
         {/* FOUC-safe: reveal-urile se ascund doar dacă JS rulează */}
         <script
           dangerouslySetInnerHTML={{

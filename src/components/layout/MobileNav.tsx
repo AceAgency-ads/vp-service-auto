@@ -13,6 +13,7 @@ import { usePathname } from "next/navigation";
 import { animate, createTimeline, stagger, type Timeline } from "animejs";
 import { SITE } from "@/lib/site";
 import { Icon, type IconName } from "@/components/ui/Icon";
+import { DirectionsTrigger } from "@/components/ui/DirectionsTrigger";
 
 /* ============================================================
    Meniu mobil — drawer animat din dreapta, temă „mașină".
@@ -408,12 +409,7 @@ export function MobileNav() {
                     {SITE.hours.map((h) => `${h.days}: ${h.interval}`).join(" · ")}
                   </span>
                 </div>
-                <a
-                  href={SITE.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-start gap-3 py-1.5"
-                >
+                <DirectionsTrigger className="flex items-start gap-3 py-1.5">
                   <Icon
                     name="map-pin"
                     size={18}
@@ -422,7 +418,7 @@ export function MobileNav() {
                   <span>
                     {SITE.address.street}, {SITE.address.city}
                   </span>
-                </a>
+                </DirectionsTrigger>
               </div>
 
               <div

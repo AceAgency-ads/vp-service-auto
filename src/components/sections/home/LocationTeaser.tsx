@@ -2,6 +2,7 @@ import Image from "next/image";
 import { IMAGES } from "@/lib/images";
 import { SITE } from "@/lib/site";
 import { Icon } from "@/components/ui/Icon";
+import { DirectionsTrigger } from "@/components/ui/DirectionsTrigger";
 
 export function LocationTeaser() {
   return (
@@ -24,15 +25,10 @@ export function LocationTeaser() {
           departe — recepție dedicată, mașină la schimb și acte pregătite
           înainte să cobori din mașină.
         </p>
-        <a
-          href={SITE.mapsUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="btn btn-ghost mt-6 inline-flex items-center gap-2"
-        >
-          <Icon name="map-pin" size={18} />
+        <DirectionsTrigger className="btn btn-ghost mt-6 inline-flex items-center gap-2">
+          <Icon name="route" size={18} />
           Vezi traseul pe hartă
-        </a>
+        </DirectionsTrigger>
       </div>
     </section>
   );

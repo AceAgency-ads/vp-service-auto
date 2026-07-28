@@ -3,6 +3,7 @@ import { SITE } from "@/lib/site";
 import { VIDEOS } from "@/lib/videos";
 import { Icon } from "@/components/ui/Icon";
 import { BackgroundVideo } from "@/components/ui/BackgroundVideo";
+import { DirectionsTrigger } from "@/components/ui/DirectionsTrigger";
 import StarBorder from "@/components/reactbits/StarBorder";
 
 /* Banda finală de conversie — telefon-first, pe fiecare pagină. */
@@ -49,6 +50,10 @@ export function CtaBand({
           <Link href="/contact" className="btn btn-ghost">
             Programează-te online
           </Link>
+          <DirectionsTrigger className="btn btn-ghost">
+            <Icon name="map-pin" size={18} />
+            Cum ajungi
+          </DirectionsTrigger>
         </div>
       </div>
       <hr className="led-line" />

@@ -3,6 +3,7 @@ import { NAV_LINKS, SITE } from "@/lib/site";
 import { SERVICES } from "@/lib/services";
 import { Logo } from "@/components/ui/Logo";
 import { Icon } from "@/components/ui/Icon";
+import { DirectionsTrigger } from "@/components/ui/DirectionsTrigger";
 
 export function Footer() {
   return (
@@ -56,11 +57,17 @@ export function Footer() {
         <div className="text-sm">
           <p className="font-heading mb-4 font-bold text-paper">Contact</p>
           <ul className="flex flex-col gap-3 text-steel-300">
-            <li className="flex items-start gap-2.5">
-              <Icon name="map-pin" size={17} className="mt-0.5 shrink-0 text-red-bright" />
-              <span>
-                {SITE.address.street}, {SITE.address.city}
-              </span>
+            <li>
+              <DirectionsTrigger className="flex items-start gap-2.5 hover:text-paper">
+                <Icon
+                  name="map-pin"
+                  size={17}
+                  className="mt-0.5 shrink-0 text-red-bright"
+                />
+                <span>
+                  {SITE.address.street}, {SITE.address.city}
+                </span>
+              </DirectionsTrigger>
             </li>
             <li className="flex items-start gap-2.5">
               <Icon name="phone" size={17} className="mt-0.5 shrink-0 text-red-bright" />

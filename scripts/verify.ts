@@ -7,7 +7,8 @@
    2. Navigație desktop + meniu mobil
    3. Formular contact: invalid (erori inline RO) + happy path
    4. Cookie consent: persistă în localStorage, dispare la reload
-   5. StickyCallBar: vizibil doar pe mobil, după scroll
+   5. Bara de acțiuni: permanentă pe mobil (inclusiv la scrollY=0),
+      absentă pe desktop; „Locație" deschide sheet-ul Maps/Waze
    6. Counterele ajung la valorile finale
    7. 404 cu FuzzyText canvas
    8. sitemap.xml cu 13 URL-uri
@@ -101,8 +102,21 @@ for (const [tag, viewport] of [
     counters.join(" · "),
   );
 
-  /* sticky call bar: doar pe mobil, după scroll */
+  /* bara de acțiuni e permanentă — trebuie să fie acolo deja la scrollY = 0 */
   const bar = page.getByTestId("sticky-call-bar");
+  await page.evaluate(() =>
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior }),
+  );
+  await page.waitForTimeout(300);
+  const topBox = await bar.boundingBox();
+  const barAtTop =
+    !!topBox && topBox.y < (viewport.height as number) && topBox.y > 0;
+  ok(
+    `[${tag}] bara de acțiuni la scrollY=0 ${tag === "mobile-390" ? "vizibilă" : "ascunsă"}`,
+    tag === "mobile-390" ? barAtTop : !barAtTop,
+  );
+
+  /* sticky call bar: doar pe mobil, după scroll */
   await page.evaluate(() =>
     window.scrollTo({ top: 800, behavior: "instant" as ScrollBehavior }),
   );
@@ -160,6 +174,35 @@ for (const [tag, viewport] of [
     .click();
   await page.waitForURL("**/servicii");
   ok("meniu mobil → /servicii", page.url().includes("/servicii"));
+  await ctx.close();
+}
+
+/* —— 3b. sheet-ul „Cum ajungi" din bara de acțiuni —— */
+{
+  const ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+  const page = await ctx.newPage();
+  page.on("pageerror", (e) => consoleErrors.push(`[directions] pageerror: ${e.message}`));
+  await page.goto(BASE, { waitUntil: "load" });
+  await dismissConsent(page);
+  await page.getByTestId("sticky-call-bar").getByText("Locație").click();
+  const sheet = page.getByTestId("directions-sheet");
+  let sheetVisible = true;
+  try {
+    await sheet.waitFor({ state: "visible", timeout: 4000 });
+  } catch {
+    sheetVisible = false;
+  }
+  ok("tap „Locație” → sheet-ul cu Google Maps / Waze", sheetVisible);
+  const waze = await sheet
+    .getByRole("link", { name: "Waze" })
+    .getAttribute("href")
+    .catch(() => null);
+  ok("sheet-ul oferă navigare Waze", !!waze?.includes("waze.com/ul"), waze ?? "—");
+  await page.screenshot({ path: path.join(OUT, "directions-sheet.png") });
+  await page.keyboard.press("Escape");
+  await page.waitForTimeout(600);
+  const sheetGone = !(await sheet.isVisible().catch(() => false));
+  ok("Escape închide sheet-ul", sheetGone);
   await ctx.close();
 }
 

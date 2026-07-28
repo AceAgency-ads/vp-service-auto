@@ -4,6 +4,7 @@ import { PageHero } from "@/components/sections/shared/PageHero";
 import { ContactForm } from "@/components/ui/ContactForm";
 import { MapEmbed } from "@/components/ui/MapEmbed";
 import { Icon } from "@/components/ui/Icon";
+import { DirectionsTrigger } from "@/components/ui/DirectionsTrigger";
 import { JsonLd } from "@/components/jsonld/JsonLd";
 import { breadcrumbSchema } from "@/lib/jsonld";
 
@@ -47,9 +48,9 @@ export default function ContactPage() {
                 </span>
                 <div>
                   <p className="font-bold text-paper">Adresă</p>
-                  <p className="mt-0.5 text-sm text-steel-300">
-                    {SITE.address.street}, {SITE.address.city}
-                  </p>
+                  <DirectionsTrigger className="mt-0.5 block text-sm text-steel-300 hover:text-paper">
+                    {SITE.address.street}, {SITE.address.city} — cum ajungi
+                  </DirectionsTrigger>
                 </div>
               </li>
               <li className="flex items-start gap-4">

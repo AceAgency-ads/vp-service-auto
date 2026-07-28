@@ -4,6 +4,7 @@ import { SITE, TRUST_CHIPS } from "@/lib/site";
 import { Icon } from "@/components/ui/Icon";
 import { HeroTitle } from "@/components/ui/HeroTitle";
 import { BackgroundVideo } from "@/components/ui/BackgroundVideo";
+import { DirectionsTrigger } from "@/components/ui/DirectionsTrigger";
 import StarBorder from "@/components/reactbits/StarBorder";
 
 export function HomeHero() {
@@ -36,8 +37,12 @@ export function HomeHero() {
       />
 
       <div className="wrap relative flex min-h-[88dvh] flex-col justify-center py-24">
-        <p className="eyebrow" data-reveal>
-          Splaiul Unirii 969 · București
+        <p data-reveal>
+          {/* fără iconiță: `.eyebrow` e inline-flex, iar pe 390px adresa se rupe
+              pe două rânduri și glifa ar rămâne suspendată în dreapta */}
+          <DirectionsTrigger className="eyebrow underline decoration-red/70 underline-offset-4 transition-colors hover:text-paper hover:decoration-red-bright">
+            {SITE.address.street} · {SITE.address.city}
+          </DirectionsTrigger>
         </p>
         <h1 className="mt-5 max-w-4xl">
           <HeroTitle text="Centru de Constatare Daune" accent="RCA / CASCO" />

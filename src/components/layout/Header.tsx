@@ -2,6 +2,7 @@ import Link from "next/link";
 import { NAV_LINKS, SITE } from "@/lib/site";
 import { Logo } from "@/components/ui/Logo";
 import { Icon } from "@/components/ui/Icon";
+import { DirectionsTrigger } from "@/components/ui/DirectionsTrigger";
 import { MobileNav } from "./MobileNav";
 
 export function Header() {
@@ -23,6 +24,12 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <DirectionsTrigger
+            ariaLabel="Cum ajungi la noi"
+            className="hidden h-11 w-11 items-center justify-center rounded-lg border border-coal-700 text-paper transition-colors hover:border-red hover:text-red-bright lg:inline-flex"
+          >
+            <Icon name="map-pin" size={19} />
+          </DirectionsTrigger>
           <a
             href={SITE.phoneHref}
             className="btn btn-primary hidden !px-5 !py-3 sm:inline-flex"

@@ -42,7 +42,8 @@ export function CookieConsent() {
           role="dialog"
           aria-label="Consimțământ cookie-uri"
           data-testid="cookie-consent"
-          className="led-frame fixed inset-x-4 bottom-4 z-50 mx-auto max-w-xl p-5 shadow-2xl sm:p-6"
+          /* pe mobil bannerul urcă peste bara permanentă de acțiuni */
+          className="led-frame fixed inset-x-4 bottom-4 z-50 mx-auto max-w-xl p-5 shadow-2xl max-md:bottom-[calc(5.5rem+env(safe-area-inset-bottom))] sm:p-6"
         >
           <p className="font-heading text-base font-bold text-paper">
             Respectăm confidențialitatea ta

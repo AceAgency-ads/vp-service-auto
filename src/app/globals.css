@@ -58,6 +58,10 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* ancorele nu mai aterizează sub headerul sticky, respectiv
+       sub bara permanentă de acțiuni de pe mobil */
+    scroll-padding-top: 5rem;
+    scroll-padding-bottom: 6rem;
   }
 
   body {

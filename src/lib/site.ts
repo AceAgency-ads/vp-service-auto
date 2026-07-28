@@ -22,26 +22,35 @@ export const SITE = {
     street: "Splaiul Unirii nr. 969",
     city: "București",
     region: "București",
-    postalCode: "040000", // TODO(client): codul poștal real
+    postalCode: "030140", // verificat pe fișa Google Business Profile
     country: "RO",
   },
+  /** Pinul real din fișa Google (CID 3512668700996052883), nu geocodare de text. */
   geo: {
-    lat: 44.3936, // TODO(client): pin exact Google Maps
-    lng: 26.1893,
+    lat: 44.3955235,
+    lng: 26.2009306,
   },
-  mapsUrl: "https://www.google.com/maps/search/?api=1&query=Splaiul+Unirii+969+Bucuresti",
-  mapsEmbedUrl:
-    "https://www.google.com/maps?q=Splaiul+Unirii+969+Bucuresti&output=embed",
+
+  /* Linkuri hartă generate din pinul real. `place` = fișa canonică (CID),
+     `directions`/`waze` = navigare, `embed` = iframe fără cheie API. */
+  maps: {
+    place: "https://maps.google.com/?cid=3512668700996052883",
+    directions:
+      "https://www.google.com/maps/dir/?api=1&destination=44.3955235%2C26.2009306&travelmode=driving",
+    waze: "https://waze.com/ul?ll=44.3955235%2C26.2009306&navigate=yes",
+    embed:
+      "https://maps.google.com/maps?q=44.3955235,26.2009306&z=16&hl=ro&output=embed",
+    /** Link-ul de share trimis de client → sameAs în JSON-LD. */
+    share: "https://share.google/mb9iYNs0aZuuMoqIY",
+  },
 
   hours: [
-    { days: "Luni – Vineri", interval: "08:00 – 18:00" }, // TODO(client): program real
-    { days: "Sâmbătă", interval: "09:00 – 14:00" },
-    { days: "Duminică", interval: "Închis" },
+    { days: "Luni – Vineri", interval: "08:00 – 17:00" },
+    { days: "Sâmbătă – Duminică", interval: "Închis" },
   ],
-  /** schema.org openingHoursSpecification */
+  /** schema.org openingHoursSpecification — zilele închise se omit (convenție schema.org) */
   hoursSchema: [
-    { dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "08:00", closes: "18:00" },
-    { dayOfWeek: ["Saturday"], opens: "09:00", closes: "14:00" },
+    { dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], opens: "08:00", closes: "17:00" },
   ],
 
   /** Asiguratori parteneri — trust signal principal */

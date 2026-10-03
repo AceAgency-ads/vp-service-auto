@@ -137,6 +137,10 @@ export function Footer() {
             </li>
           </ul>
         </div>
+        <p className="wrap pb-4 text-xs text-steel-300">
+            Website realizat de{" "}
+            <a href="https://aceagency.ro/" rel="nofollow" className="inline-flex min-h-11 items-center underline underline-offset-4 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4">ACE Agency</a>
+          </p>
       </div>
     </footer>
   );
